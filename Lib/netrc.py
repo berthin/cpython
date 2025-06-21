@@ -67,7 +67,8 @@ class netrc:
     def __init__(self, file=None):
         default_netrc = file is None
         if file is None:
-            file = os.path.join(os.path.expanduser("~"), ".netrc")
+            file = os.environ.get("NETRC", None) or os.path.join(os.path.expanduser("~"), ".netrc")
+        
         self.hosts = {}
         self.macros = {}
         try:
